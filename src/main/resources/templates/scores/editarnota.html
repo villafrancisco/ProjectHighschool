@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<title>Editar Nota</title>
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="/scores">Notas
+
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/pupils">Alumnos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/stadistics">Estadisticas</a></li>
+
+				</ul>
+
+			</div>
+		</nav>
+
+		<div class="row text-center">
+			<div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 mx-auto">
+				<!-- <h1>
+					<a th:href="'/pupils/'+${score.pupil.pk_id}+'/scores'"><i
+						class="bi bi-arrow-left-square-fill"></i></a>
+				</h1> -->
+				<h2 class="mr-auto ml-auto">Editar Nota</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 mx-auto">
+
+				<form action="guardar" method="POST">
+
+					<div class="form-group">
+						<label for="pk_id">Alumno</label> <select disabled
+							class="form-control" id="pk_id" name="pk_id">
+							<option th:each="pupil:${pupils}" th:value="${pupil.pk_id}"
+								th:text="${pupil.name}"
+								th:selected="${pupil.pk_id==score.pupil.pk_id}"></option>
+						</select>
+
+					</div>
+					<div class="form-group">
+						<label for="fk_subject">Asignatura</label> <select
+							class="form-control" id="fk_subject" name="fk_subject">
+							<option th:each="subject:${subjects}"
+								th:value="${subject.pk_subject}" th:text="${subject.name}"
+								th:selected="${subject.pk_subject==score.subject.pk_subject}"></option>
+						</select> <input type="hidden" name="pk_score" id="pk_score"
+							th:value="${score.pk_score}">
+					</div>
+					<div class="form-group">
+						<label for="fk_calification">Nota</label> <select
+							class="form-control" id="fk_calification" name="fk_calification">
+							<option th:each="calification:${califications}"
+								th:value="${calification.pk_grade}"
+								th:text="${calification.pk_grade}"
+								th:selected="${calification.pk_grade==score.calification.pk_grade}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="date">Fecha</label> <input type="date"
+							class="form-control" id="date" name="date"
+							th:value="${score.date}">
+
+					</div>
+					<button type="submit" class="btn btn-primary">Guardar</button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+		crossorigin="anonymous"></script>
+</body>
+</html>

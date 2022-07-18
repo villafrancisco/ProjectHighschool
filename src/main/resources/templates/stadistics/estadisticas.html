@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<title>Listado de Notas</title>
+</head>
+<body>
+	<div class="container">
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="/scores">Notas
+
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/pupils">Alumnos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/stadistics">Estadisticas</a></li>
+
+				</ul>
+
+			</div>
+		</nav>
+		<div class="row">
+			<div
+				class="col-sm-10 col-md-10 col-lg-10 col-xl-10 mx-auto text-center">
+
+				<h2 class="mr-auto ml-auto">Estadisticas</h2>
+
+			</div>
+		</div>
+		<div class="row">
+			<div
+				class="col-sm-10 col-md-10 col-lg-10 col-xl-10 mx-auto text-center">
+				<h4>Alumno con mejor nota media en 2020</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Nombre</td>
+							<th scope="col">Nota Media</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="score:${pupilsBestAVG2020}">
+							<td th:text="${score.pupil.name}"></td>
+							<td th:text="${score.calification.pk_grade}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>Alumno con mayor número de suspensos</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Nombre</td>
+							<th scope="col">Numero de suspensos</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pupil:${maxFailure}">
+							<td th:text="${pupil.nombre}"></td>
+							<td th:text="${pupil.numero_suspensos}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>Alumnos nacidos en 2004 y que se hayan examinado de historia</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Nombre</td>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pupil:${pupils2004History}">
+							<td th:text="${pupil.name}"></td>
+							
+						</tr>
+					</tbody>
+				</table>
+				
+				<h4>Asignatura con menor nota media entre los alumnos nacidos en 2005</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Nombre</td>
+							<th scope="col">Nota Media</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="subject:${bestSubjectCalification2005}">
+							<td th:text="${subject.asignatura}"></td>
+							<td th:text="${subject.notamedia}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>Asignatura de la que se han realizado más test</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Asignatura</td>
+							<th scope="col">Numero de test</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="subject:${maxTest}">
+							<td th:text="${subject.name}"></td>
+							<td th:text="${subject.numero_tests}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>Asignatura con mayor número de alumos -distintos- evaluados</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Asignatura</td>
+							<th scope="col">Exámenes</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="subject:${maxNumberPupils}">
+							<td th:text="${subject.asignatura}"></td>
+							<td th:text="${subject.examenes}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>Calificaciones del mes de febrero 2021, ordenadas por asignatura y de mejor a peor</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Asignatura</td>
+							<th scope="col">Nota</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="score:${scoresFebruary}">
+							<td th:text="${score.subject.name}"></td>
+							<td th:text="${score.calification.pk_grade}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<h4>Asignaturas de las que se hayan realizado tests en Abril de 2021</h4>
+				<table class="table table-borderless  table-sm">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Asignatura</td>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="subject:${subjects2021_04}">
+							<td th:text="${subject.name}"></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+		crossorigin="anonymous"></script>
+</body>
+</html>
